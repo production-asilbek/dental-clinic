@@ -1,0 +1,50 @@
+name: iOS Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Clinic
+    runs-on: macos-15
+
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Create CI config
+        shell: bash
+        run: |
+          mkdir -p Clinic/Config
+          supabase_url="${SUPABASE_URL:-https://example.supabase.co}"
+          escaped_supabase_url="${supabase_url/\/\//\/\$()\/}"
+          cat > Clinic/Config/Development.xcconfig <<EOF
+          SUPABASE_URL = ${escaped_supabase_url}
+          SUPABASE_ANON_KEY = ${SUPABASE_ANON_KEY:-ci-placeholder}
+          EOF
+
+      - name: Resolve Swift packages
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -project Clinic.xcodeproj \
+            -scheme Clinic
+
+      - name: Build
+        run: |
+          xcodebuild clean build \
+            -project Clinic.xcodeproj \
+            -scheme Clinic \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO

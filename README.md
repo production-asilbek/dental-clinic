@@ -224,6 +224,34 @@ Open `Clinic.xcodeproj` in Xcode on macOS.
 2. Select an iPhone simulator or device.
 3. Run the `Clinic` target.
 
+## GitHub Actions Build
+
+The repo includes `.github/workflows/ios-build.yml`.
+
+The workflow:
+
+1. Runs on GitHub's macOS runner.
+2. Creates `Clinic/Config/Development.xcconfig` during CI.
+3. Resolves Swift Package Manager dependencies.
+4. Builds the `Clinic` scheme for the iOS Simulator with signing disabled.
+
+Add these repository secrets in GitHub:
+
+```text
+SUPABASE_URL
+SUPABASE_ANON_KEY
+```
+
+Go to **GitHub repository → Settings → Secrets and variables → Actions → New repository secret**.
+
+The build can run with placeholder values, but real values are better for matching the app configuration. Do not add Eskiz credentials or the Supabase service role key to the iOS build workflow.
+
+### CocoaPods
+
+The app currently uses Swift Package Manager, so GitHub Actions does not run `pod install`.
+
+`Podfile` is included only as a placeholder for future CocoaPods dependencies. If you add real pods later, open the generated `.xcworkspace` locally and update the GitHub Actions workflow to build the workspace instead of `Clinic.xcodeproj`.
+
 ## Manual Test Checklist
 
 Test the complete MVP after configuring Supabase, Google OAuth, and Eskiz:
