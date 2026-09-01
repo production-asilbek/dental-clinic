@@ -1,0 +1,16 @@
+.DS_Store
+xcuserdata/
+DerivedData/
+.build/
+*.xcuserstate
+*.moved-aside
+*.swp
+
+# Local app configuration. Copy the example and fill locally.
+Clinic/Config/Development.xcconfig
+
+# Supabase local/runtime secrets
+.env
+.env.*
+supabase/.env
+supabase/.temp/
