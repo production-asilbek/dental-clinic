@@ -198,7 +198,7 @@ enum DateText {
     static let ruDate: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
-        formatter.dateStyle = .detailed
+        formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     }()
