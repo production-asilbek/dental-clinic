@@ -26,7 +26,7 @@
 		01B000000000000000000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01B000000000000000000008 /* Development.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Development.xcconfig.example; sourceTree = "<group>"; };
 		01B000000000000000000009 /* Clinic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clinic.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		01B000000000000000000010 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Development.xcconfig; sourceTree = "<group>"; };
+		01B000000000000000000010 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config/Shared.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 				01B000000000000000000004 /* ViewModels.swift */,
 				01B000000000000000000005 /* Views.swift */,
 				01B000000000000000000007 /* Info.plist */,
-				01B000000000000000000010 /* Development.xcconfig */,
+				01B000000000000000000010 /* Shared.xcconfig */,
 				01B000000000000000000008 /* Development.xcconfig.example */,
 				01B000000000000000000006 /* Assets.xcassets */,
 			);
@@ -277,7 +277,7 @@
 		};
 		01F000000000000000000009 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01B000000000000000000010 /* Development.xcconfig */;
+			baseConfigurationReference = 01B000000000000000000010 /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -303,7 +303,7 @@
 		};
 		01F000000000000000000010 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01B000000000000000000010 /* Development.xcconfig */;
+			baseConfigurationReference = 01B000000000000000000010 /* Shared.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

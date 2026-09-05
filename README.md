@@ -27,6 +27,7 @@ Clinic/
   ViewModels.swift
   Views.swift
   Config/
+    Shared.xcconfig
     Development.xcconfig.example
 supabase/
   migrations/
@@ -86,22 +87,16 @@ uz.clinika.mvp://login-callback
 
 If you change `PRODUCT_BUNDLE_IDENTIFIER`, update the redirect URL in Supabase as well.
 
-## Step 4: Add iOS Supabase Environment Values
+## Step 4: iOS Supabase Environment Values
 
-Copy the example config:
-
-```bash
-cp Clinic/Config/Development.xcconfig.example Clinic/Config/Development.xcconfig
-```
-
-Fill in:
+`Clinic/Config/Shared.xcconfig` is committed so the project builds immediately after cloning:
 
 ```text
 SUPABASE_URL = https:/$()/YOUR_PROJECT_REF.supabase.co
 SUPABASE_ANON_KEY = YOUR_SUPABASE_ANON_KEY
 ```
 
-`Clinic/Config/Development.xcconfig` is ignored by Git. Do not commit real keys.
+The Supabase anon key is a public client key used by the iOS app. Do not put service role keys, Eskiz credentials, or other private secrets in any iOS config file.
 
 ## Step 5: Deploy Edge Function
 
@@ -231,20 +226,11 @@ The repo includes `.github/workflows/ios-build.yml`.
 The workflow:
 
 1. Runs on GitHub's macOS runner.
-2. Creates `Clinic/Config/Development.xcconfig` during CI.
+2. Uses the committed `Clinic/Config/Shared.xcconfig`.
 3. Resolves Swift Package Manager dependencies.
 4. Builds the `Clinic` scheme for the iOS Simulator with signing disabled.
 
-Add these repository secrets in GitHub:
-
-```text
-SUPABASE_URL
-SUPABASE_ANON_KEY
-```
-
-Go to **GitHub repository → Settings → Secrets and variables → Actions → New repository secret**.
-
-The build can run with placeholder values, but real values are better for matching the app configuration. Do not add Eskiz credentials or the Supabase service role key to the iOS build workflow.
+No GitHub secrets are required for the iOS simulator build. Do not add Eskiz credentials or the Supabase service role key to the iOS build workflow.
 
 ### CocoaPods
 
